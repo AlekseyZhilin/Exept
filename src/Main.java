@@ -1,10 +1,13 @@
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         add("фамилия имя отчество 09.12.2023 1112223344 m");
+        add("фамилия имя1 отчество1 09.12.2023 1112223344 w");
+        add(enterNewUser());
         
     }
 
@@ -30,6 +33,8 @@ public class Main {
             user.setGender(convertGender(userParam[5]));
 
             System.out.println(user.getParam());
+            FileWriter fileWriter = new FileWriter(user.getFamily());
+            fileWriter.write(user);
         }
         catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
@@ -81,5 +86,29 @@ public class Main {
         if (!strGender.equals("m") && !strGender.equals("w")) {throw new IllegalArgumentException(mes);}
 
         return strGender;
+    }
+
+    public static String enterNewUser(){
+        Scanner scanner = new Scanner(System.in);
+        StringBuilder stringBuilder = new StringBuilder();
+        System.out.println("введите фамилию:");
+        stringBuilder.append(scanner.nextLine());
+        stringBuilder.append(" ");
+        System.out.println("введите имя:");
+        stringBuilder.append(scanner.nextLine());
+        stringBuilder.append(" ");
+        System.out.println("введите отчество:");
+        stringBuilder.append(scanner.nextLine());
+        stringBuilder.append(" ");
+        System.out.println("введите дату рождения:");
+        stringBuilder.append(scanner.nextLine());
+        stringBuilder.append(" ");
+        System.out.println("введите телефон:");
+        stringBuilder.append(scanner.nextLine());
+        stringBuilder.append(" ");
+        System.out.println("введите пол:");
+        stringBuilder.append(scanner.nextLine());
+
+        return stringBuilder.toString();
     }
 }
